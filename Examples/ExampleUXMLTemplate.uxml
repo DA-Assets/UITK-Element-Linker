@@ -1,0 +1,25 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="elem1" style="flex-grow: 1;">
+        <ui:VisualElement name="elem2" style="flex-grow: 1;">
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btn1" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btn1" />
+            <ui:Button text="Click" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btn1" />
+        </ui:VisualElement>
+        <ui:VisualElement name="elem2" style="flex-grow: 1;">
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btn1" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btn1" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btn1" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <DA_Assets.UEL.VisualElementG guid="5c3a3a122e654af7a349189ae2038771">
+        <DA_Assets.UEL.VisualElementG guid="92f00728d29540ab98223c54348d2cbd">
+            <DA_Assets.UEL.ButtonG guid="9c7f1231e0aa438687d8804d63053783" name="btn2" text="Click" />
+        </DA_Assets.UEL.VisualElementG>
+    </DA_Assets.UEL.VisualElementG>
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 1;">
+            <DA_Assets.UEL.ButtonG guid="31e8d3a6345f4563af32ccf8fb4b7e0e" name="btn3" text="Click" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Button text="Click" parse-escape-sequences="true" display-tooltip-when-elided="true" name="buttonWithUniqueName" />
+</ui:UXML>

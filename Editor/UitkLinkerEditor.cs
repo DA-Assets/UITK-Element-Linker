@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace DA_Assets.UEL
 {
-    [CustomEditor(typeof(UitkLinker<>), true)]
+    [CustomEditor(typeof(UitkLinker<>), true), CanEditMultipleObjects]
     public class UitkLinkerEditor : Editor
     {
         private DAInspectorMini gui => DAInspectorMini.Instance;
