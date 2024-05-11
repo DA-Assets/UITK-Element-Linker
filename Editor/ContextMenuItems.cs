@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 
 namespace DA_Assets.UEL
 {
-    public static class UIBuilderContextMenu
+    public static class ContextMenuItems
     {
         private static bool _debug = false;
 
@@ -20,28 +20,42 @@ namespace DA_Assets.UEL
         private const string VISUAL_TREE_ASSET_FIELD_NAME = "visualTreeAsset";
         private const string SELECTION_FIELD_NAME = "m_Selection";
 
-        [MenuItem("Tools/" + UitkLinkerBase.Publisher + "/" + UitkLinkerBase.Product + " > Copy element guid hierarchy", false, 10)]
+        [MenuItem("Tools/" + UitkLinkerBase.Publisher + "/" + UitkLinkerBase.Product + ": Copy element guid hierarchy", false, 10)]
         private static void CopyElementGuidHierarchy_OnClick()
         {
             CopyHierarchy(guid: true, includeIndex: false, includeName: true);
         }
 
-        [MenuItem("Tools/" + UitkLinkerBase.Publisher + "/" + UitkLinkerBase.Product + " > Copy element name hierarchy", false, 11)]
+        [MenuItem("Tools/" + UitkLinkerBase.Publisher + "/" + UitkLinkerBase.Product + ": Copy element name hierarchy", false, 11)]
         private static void CopyElementNameHierarchy_OnClick()
         {
             CopyHierarchy(guid: false, includeIndex: false, includeName: true);
         }
 
-        [MenuItem("Tools/" + UitkLinkerBase.Publisher + "/" + UitkLinkerBase.Product + " > Copy element index hierarchy", false, 12)]
+        [MenuItem("Tools/" + UitkLinkerBase.Publisher + "/" + UitkLinkerBase.Product + ": Copy element index hierarchy", false, 12)]
         private static void CopyElementIndexHierarchy_OnClick()
         {
             CopyHierarchy(guid: false, includeIndex: true, includeName: false);
         }
 
-        [MenuItem("Tools/" + UitkLinkerBase.Publisher + "/" + UitkLinkerBase.Product + " > Copy element index + name hierarchy", false, 13)]
+        [MenuItem("Tools/" + UitkLinkerBase.Publisher + "/" + UitkLinkerBase.Product + ": Copy element index + name hierarchy", false, 13)]
         private static void CopyElementIndexNameHierarchy_OnClick()
         {
             CopyHierarchy(guid: false, includeIndex: true, includeName: true);
+        }
+
+        //[MenuItem("Tools/" + UitkLinkerBase.Publisher + "/" + UitkLinkerBase.Product + ": Test Item", false, 14)]
+        private static void TestItem_OnClick()
+        {
+            GetUIBuilderWindow(out var uiBuilderType, out var currentBuilderWindow);
+
+            VisualElement selectedElement = GetSingleSelectedElement(uiBuilderType, currentBuilderWindow);
+
+            if (selectedElement == null)
+            {
+                Debug.Log($"No element selected.");
+                return;
+            }
         }
 
         private static void CopyHierarchy(bool guid, bool includeIndex, bool includeName)

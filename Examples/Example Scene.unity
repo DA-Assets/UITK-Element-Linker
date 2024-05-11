@@ -153,17 +153,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc2fd0089a67bb45a031683c988bdfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _linkingMode: 0
+  _linkingMode: 2
   _guid: 
   _guids: []
   _name: 
   _names:
   - Index: -1
     Name: elem1
+    Init: 0
   - Index: 0
     Name: elem2
+    Init: 0
   - Index: 2
     Name: btn1
+    Init: 0
   _uiDocument: {fileID: 1739256324}
   _debug: 0
   _onClick:
@@ -239,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc2fd0089a67bb45a031683c988bdfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _linkingMode: 0
+  _linkingMode: 1
   _guid: 
   _guids: []
   _name: buttonWithUniqueName
@@ -413,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc2fd0089a67bb45a031683c988bdfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _linkingMode: 1
+  _linkingMode: 3
   _guid: 31e8d3a6345f4563af32ccf8fb4b7e0e
   _guids: []
   _name: 
@@ -493,7 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc2fd0089a67bb45a031683c988bdfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _linkingMode: 1
+  _linkingMode: 4
   _guid: 
   _guids:
   - 5c3a3a122e654af7a349189ae2038771

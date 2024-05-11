@@ -39,26 +39,27 @@ namespace DA_Assets.UEL
             {
                 case UitkLinkingMode.Name:
                     {
-                        if (_fullNamePathSearch)
-                        {
-                            elem = FindComponentByHierarchy(root, _names, x => x.name);
-                        }
-                        else
-                        {
-                            elem = root.Query(_name);
-                        }
+                        elem = root.Query(_name);
+                    }
+                    break;
+                case UitkLinkingMode.IndexNames:
+                    {
+                        elem = FindComponentByHierarchy(root, _names, x => x.name);
                     }
                     break;
                 case UitkLinkingMode.Guid:
                     {
-                        if (_fullGuidPathSearch)
-                        {
-                            elem = FindComponentByHierarchy(root, _guids, x => x.guid);
-                        }
-                        else
-                        {
-                            elem = FindGuidRecursive(root, _guid);
-                        }
+                        elem = FindGuidRecursive(root, _guid);
+                    }
+                    break;
+                case UitkLinkingMode.Guids:
+                    {
+                        elem = FindComponentByHierarchy(root, _guids, x => x.guid);
+                    }
+                    break;
+                default:
+                    {
+                        Debug.LogError($"{nameof(UitkLinkingMode)} for '{goName}' component is not specified.");
                     }
                     break;
             }
@@ -196,31 +197,27 @@ namespace DA_Assets.UEL
             {
                 case UitkLinkingMode.Name:
                     {
-                        if (_fullNamePathSearch)
+                        str = _name;
+                    }
+                    break;
+                case UitkLinkingMode.IndexNames:
+                    {
+                        if (_names.Length > 0)
                         {
-                            if (_names.Length > 0)
-                            {
-                                str = _names.Last().Name;
-                            }
-                        }
-                        else
-                        {
-                            str = _name;
+                            str = _names.Last().Name;
                         }
                     }
                     break;
                 case UitkLinkingMode.Guid:
                     {
-                        if (_fullGuidPathSearch)
+                        str = _guid;
+                    }
+                    break;
+                case UitkLinkingMode.Guids:
+                    {
+                        if (_guids.Length > 0)
                         {
-                            if (_guids.Length > 0)
-                            {
-                                str = _guids.Last();
-                            }
-                        }
-                        else
-                        {
-                            str = _guid;
+                            str = _guids.Last();
                         }
                     }
                     break;
@@ -251,6 +248,7 @@ namespace DA_Assets.UEL
     {
         public int Index;
         public string Name;
+        public bool Init;
     }
 
     public abstract class UitkLinkerBase : MonoBehaviour
@@ -259,10 +257,7 @@ namespace DA_Assets.UEL
         public const string Publisher = "D.A. Assets";
         public const int DEFAULT_INDEX = -1;
 
-        protected bool _fullGuidPathSearch => _guids.Length > 0;
-        protected bool _fullNamePathSearch => _names.Length > 0;
-
-        [SerializeField] protected UitkLinkingMode _linkingMode = UitkLinkingMode.Name;
+        [SerializeField] protected UitkLinkingMode _linkingMode = UitkLinkingMode.IndexNames;
         [SerializePropertyMini(nameof(_linkingMode))]
         public UitkLinkingMode LinkingMode { get => _linkingMode; set => _linkingMode = value; }
 
@@ -286,7 +281,7 @@ namespace DA_Assets.UEL
         [SerializeField]
         protected
 #if UNITY_2021_1_OR_NEWER
-            UIDocument 
+            UIDocument
 #else
             GameObject
 #endif
@@ -316,12 +311,34 @@ namespace DA_Assets.UEL
         {
 
         }
+
+        public virtual void OnValidate()
+        {
+            if (_linkingMode == UitkLinkingMode.IndexNames)
+            {
+                for (int i = 0; i < _names.Length; i++)
+                {
+                    ElementIndexName ein = _names[i];
+
+                    if (ein.Index == 0 && string.IsNullOrEmpty(ein.Name) && !ein.Init)
+                    {
+                        ein.Init = true;
+                        ein.Index = UitkLinkerBase.DEFAULT_INDEX;
+                    }
+
+                    _names[i] = ein;
+                }
+            }
+        }
     }
 
     public enum UitkLinkingMode
     {
-        Name,
-        Guid
+        None = 0,
+        Name = 1,
+        IndexNames = 2,
+        Guid = 3,
+        Guids = 4,
     }
 
     public interface IHaveElement<T>

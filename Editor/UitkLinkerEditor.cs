@@ -22,18 +22,6 @@ namespace DA_Assets.UEL
 
         public override VisualElement CreateInspectorGUI()
         {
-            for (int i = 0; i < monoBeh.Names.Length; i++)
-            {
-                ElementIndexName ein = monoBeh.Names[i];
-
-                if (ein.Index == 0 && string.IsNullOrEmpty(ein.Name))
-                {
-                    ein.Index = UitkLinkerBase.DEFAULT_INDEX;
-                }
-
-                monoBeh.Names[i] = ein;
-            }
-
             VisualElement root = new VisualElement();
             IMGUIContainer imguiContainer = new IMGUIContainer(() =>
             {
@@ -66,12 +54,20 @@ namespace DA_Assets.UEL
                         case UitkLinkingMode.Name:
                             {
                                 gui.SerializedPropertyField<UitkLinkerBase>(serializedObject, x => x.Name);
+                            }
+                            break;
+                        case UitkLinkingMode.IndexNames:
+                            {
                                 gui.SerializedPropertyField<UitkLinkerBase>(serializedObject, x => x.Names);
                             }
                             break;
                         case UitkLinkingMode.Guid:
                             {
                                 gui.SerializedPropertyField<UitkLinkerBase>(serializedObject, x => x.Guid);
+                            }
+                            break;
+                        case UitkLinkingMode.Guids:
+                            {
                                 gui.SerializedPropertyField<UitkLinkerBase>(serializedObject, x => x.Guids);
                             }
                             break;

@@ -1,9 +1,9 @@
 
-![Logo](https://da-assets.github.io/site/files/uel/repos/cover.png)
+![Logo](https://da-assets.github.io/site/files/uel/repos/cover2.png)
 
-![App Screenshot](https://da-assets.github.io/site/files/uel/repos/promo1.png)
+![App Screenshot](https://da-assets.github.io/site/files/uel/repos/promo1_2.png)
 
-![App Screenshot](https://da-assets.github.io/site/files/uel/repos/promo2.png)
+![App Screenshot](https://da-assets.github.io/site/files/uel/repos/promo2_2.png)
 
 
 The asset allows you to easily set up linking between your UI Toolkit elements and MonoBehaviour scripts, without the need to use the "Query" method.
