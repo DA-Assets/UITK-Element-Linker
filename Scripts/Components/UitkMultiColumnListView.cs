@@ -2,7 +2,7 @@
 using System.Reflection;
 using UnityEngine.UIElements;
 
-namespace DA_Assets.UitkComponentLinker
+namespace DA_Assets.UEL
 {
     public class UitkMultiColumnListView : UitkLinker<MultiColumnListView> { }
 

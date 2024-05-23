@@ -1,29 +1,31 @@
 ﻿using System;
-using UnityEngine;
 using UnityEngine.UIElements;
 
-public static class GuidGenerator
+namespace DA_Assets.UEL
 {
-    public static void GenerateGuid(UxmlStringAttributeDescription m_Guid, IHaveGuid ihg, IUxmlAttributes bag, CreationContext cc)
+    public static class GuidGenerator
     {
-        string guid = Guid.NewGuid().ToString();
-        guid = guid.Replace("-", "");
-
-        ihg.guid = m_Guid.GetValueFromBag(bag, cc);
-
-        if (ihg.guid == "default_value")
+        public static void GenerateGuid(UxmlStringAttributeDescription m_Guid, IHaveGuid ihg, IUxmlAttributes bag, CreationContext cc)
         {
-            ihg.guid = guid;
+            string guid = Guid.NewGuid().ToString();
+            guid = guid.Replace("-", "");
+
+            ihg.guid = m_Guid.GetValueFromBag(bag, cc);
+
+            if (ihg.guid == "default_value")
+            {
+                ihg.guid = guid;
+            }
+        }
+
+        public static UxmlStringAttributeDescription GetGuidField()
+        {
+            return new UxmlStringAttributeDescription { name = nameof(IHaveGuid.guid), defaultValue = "default_value" };
         }
     }
 
-    public static UxmlStringAttributeDescription GetGuidField()
+    public interface IHaveGuid
     {
-        return new UxmlStringAttributeDescription { name = nameof(IHaveGuid.guid), defaultValue = "default_value" };
+        string guid { get; set; }
     }
-}
-
-public interface IHaveGuid
-{
-    string guid { get; set; }
 }
