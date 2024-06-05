@@ -1,4 +1,4 @@
-#if UNITY_2020_1_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
 using UnityEngine.UIElements;
 
 namespace DA_Assets.UEL
@@ -58,7 +58,7 @@ namespace DA_Assets.UEL
                 obj.direction = m_Direction.GetValueFromBag(bag, cc);
                 obj.pageSize = m_PageSize.GetValueFromBag(bag, cc);
                 obj.showInputField = m_ShowInputField.GetValueFromBag(bag, cc);
-#if UNITY_2021_1_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
                 obj.inverted = m_Inverted.GetValueFromBag(bag, cc);
 #endif
                 base.Init(ve, bag, cc);

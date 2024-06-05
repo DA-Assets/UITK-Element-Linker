@@ -51,13 +51,13 @@ namespace DA_Assets.UEL
 
                 TextElementG obj = (TextElementG)ve;
                 obj.text = m_Text.GetValueFromBag(bag, cc);
-#if UNITY_2021_1_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
                 obj.enableRichText = m_EnableRichText.GetValueFromBag(bag, cc);
 #endif
 #if UNITY_2022_1_OR_NEWER
                 obj.parseEscapeSequences = m_ParseEscapeSequences.GetValueFromBag(bag, cc);
 #endif
-#if UNITY_2020_1_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
                 obj.displayTooltipWhenElided = m_DisplayTooltipWhenElided.GetValueFromBag(bag, cc);
 #endif
 

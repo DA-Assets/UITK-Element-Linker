@@ -27,7 +27,7 @@ namespace DA_Assets.UEL
             }
 
             VisualElement root =
-#if UNITY_2021_1_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
                 _uiDocument.rootVisualElement;
 #else  
                 null;
@@ -280,7 +280,7 @@ namespace DA_Assets.UEL
 
         [SerializeField]
         protected
-#if UNITY_2021_1_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
             UIDocument
 #else
             GameObject
@@ -288,7 +288,7 @@ namespace DA_Assets.UEL
             _uiDocument;
         [SerializePropertyMini(nameof(_uiDocument))]
         public
-#if UNITY_2021_1_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
             UIDocument
 #else
             GameObject

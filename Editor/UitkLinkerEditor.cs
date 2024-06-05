@@ -73,7 +73,7 @@ namespace DA_Assets.UEL
                             break;
                     }
 
-#if UNITY_2020_1_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
                     if (targetType == typeof(UitkButton))
                     {
                         gui.SerializedPropertyField<UitkButton>(serializedObject, x => x.OnClick);;
@@ -138,4 +138,3 @@ namespace DA_Assets.UEL
     }
 
 }
-

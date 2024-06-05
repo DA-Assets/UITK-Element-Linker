@@ -104,8 +104,8 @@ namespace DA_Assets.UEL
 
                 json = ElementIndexNameSerializator.ConvertElementsToJson("_names", elementIndexNames);
 
-#if UNITY_2021_1_OR_NEWER
-                Debug.Log($"The hierarchy of component '{(string.IsNullOrWhiteSpace(selectedElement.name) ? selectedElement.GetType() : selectedElement.name)}' is copied to the clipboard.");
+#if UNITY_2021_3_OR_NEWER
+                Debug.Log($"The hierarchy of component '{(string.IsNullOrWhiteSpace(selectedElement.name) ? selectedElement.GetType().ToString() : selectedElement.name)}' is copied to the clipboard.");
 #else
                 Debug.Log($"The hierarchy of component is copied to the clipboard.");
 #endif
@@ -456,4 +456,3 @@ namespace DA_Assets.UEL
         }
     }
 }
-

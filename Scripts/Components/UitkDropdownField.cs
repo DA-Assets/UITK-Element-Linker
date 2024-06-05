@@ -1,4 +1,4 @@
-#if UNITY_2021_1_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 
@@ -33,7 +33,9 @@ namespace DA_Assets.UEL
                 List<string> list = ParseChoiceList(m_Choices.GetValueFromBag(bag, cc));
                 if (list != null)
                 {
+#if UNITY_2021_3_OR_NEWER
                     dropdownField.choices = list;
+#endif
                 }
 
                 dropdownField.index = m_Index.GetValueFromBag(bag, cc);

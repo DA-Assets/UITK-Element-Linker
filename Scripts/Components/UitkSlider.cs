@@ -56,10 +56,10 @@ namespace DA_Assets.UEL
                 obj.highValue = m_HighValue.GetValueFromBag(bag, cc);
                 obj.direction = m_Direction.GetValueFromBag(bag, cc);
                 obj.pageSize = m_PageSize.GetValueFromBag(bag, cc);
-#if UNITY_2020_1_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
                 obj.showInputField = m_ShowInputField.GetValueFromBag(bag, cc);
 #endif
-#if UNITY_2021_1_OR_NEWER
+#if UNITY_2021_3_OR_NEWER
                 obj.inverted = m_Inverted.GetValueFromBag(bag, cc);
 #endif
                 base.Init(ve, bag, cc);
