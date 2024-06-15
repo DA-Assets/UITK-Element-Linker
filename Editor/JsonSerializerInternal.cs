@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace DA_Assets.UEL
 {
-    internal class JsonSerializerInternal
+    public class JsonSerializerInternal
     {
         private static MethodInfo serializeMethod;
 

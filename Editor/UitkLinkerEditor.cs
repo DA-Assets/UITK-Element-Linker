@@ -8,8 +8,6 @@ namespace DA_Assets.UEL
     [CustomEditor(typeof(UitkLinker<>), true), CanEditMultipleObjects]
     public class UitkLinkerEditor : Editor
     {
-        private DAInspectorMini gui => DAInspectorMini.Instance;
-
         UitkLinkerBase monoBeh;
 
         Type targetType = null;
@@ -34,107 +32,94 @@ namespace DA_Assets.UEL
             return root;
         }
 
-
         public void OnInspectorLegacy(VisualElement root)
         {
             serializedObject.Update();
 
-            gui.DrawGroup(new Group
-            {
-                GroupType = GroupType.Vertical,
-                Style = GuiStyle.DAInspectorBackground,
-                DarkBg = true,
-                Body = () =>
-                {
-                    gui.SerializedPropertyField<UitkLinkerBase>(serializedObject, x => x.UIDocument);
-                    gui.SerializedPropertyField<UitkLinkerBase>(serializedObject, x => x.LinkingMode);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("_uiDocument"));
+            EditorGUILayout.Space(5);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("_linkingMode"));
+            EditorGUILayout.Space(5);
 
-                    switch (monoBeh.LinkingMode)
-                    {
-                        case UitkLinkingMode.Name:
-                            {
-                                gui.SerializedPropertyField<UitkLinkerBase>(serializedObject, x => x.Name);
-                            }
-                            break;
-                        case UitkLinkingMode.IndexNames:
-                            {
-                                gui.SerializedPropertyField<UitkLinkerBase>(serializedObject, x => x.Names);
-                            }
-                            break;
-                        case UitkLinkingMode.Guid:
-                            {
-                                gui.SerializedPropertyField<UitkLinkerBase>(serializedObject, x => x.Guid);
-                            }
-                            break;
-                        case UitkLinkingMode.Guids:
-                            {
-                                gui.SerializedPropertyField<UitkLinkerBase>(serializedObject, x => x.Guids);
-                            }
-                            break;
-                    }
+            SerializedProperty linkingMode = serializedObject.FindProperty("_linkingMode");
+            switch ((UitkLinkingMode)linkingMode.enumValueIndex)
+            {
+                case UitkLinkingMode.Name:
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_name"));
+                    break;
+                case UitkLinkingMode.IndexNames:
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_names"));
+                    break;
+                case UitkLinkingMode.Guid:
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_guid"));
+                    break;
+                case UitkLinkingMode.Guids:
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_guids"));
+                    break;
+            }
 
 #if UNITY_2021_3_OR_NEWER
-                    if (targetType == typeof(UitkButton))
-                    {
-                        gui.SerializedPropertyField<UitkButton>(serializedObject, x => x.OnClick);;
-                    }
+            if (target.GetType() == typeof(UitkButton))
+            {
+                EditorGUILayout.Space(5);
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("_onClick"));
+            }
 #endif
 
-                    if (monoBeh.IsDebug)
-                    {
-                        GUILayout.Space(15);
-                        base.OnInspectorGUI();
-                    }
-                    else
-                    {
-                        gui.SerializedPropertyField<UitkLinkerBase>(serializedObject, x => x.IsDebug);
-                    }
-                }
-            });
+            SerializedProperty isDebug = serializedObject.FindProperty("_debug");
+            if (isDebug.boolValue)
+            {
+                GUILayout.Space(15);
+                base.OnInspectorGUI();
+            }
+            else
+            {
+                EditorGUILayout.PropertyField(isDebug);
+            }
 
             serializedObject.ApplyModifiedProperties();
         }
-    }
 
-    [CustomPropertyDrawer(typeof(ElementIndexName))]
-    public class ElementIndexNameDrawer : PropertyDrawer
-    {
-        static readonly ElementIndexName def = default;
 
-        const int padding = 2;
-        const float spacing = 10;
-        const float indexFieldWidth = 30;
-        const float labelWidth = 50;
-
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        [CustomPropertyDrawer(typeof(ElementIndexName))]
+        public class ElementIndexNameDrawer : PropertyDrawer
         {
-            EditorGUI.BeginProperty(position, label, property);
-            EditorGUI.BeginChangeCheck();
+            static readonly ElementIndexName def = default;
 
-            int indent = EditorGUI.indentLevel;
-            EditorGUI.indentLevel = 0;
+            const int padding = 2;
+            const float spacing = 10;
+            const float indexFieldWidth = 30;
+            const float labelWidth = 50;
 
-            EditorGUIUtility.labelWidth = labelWidth;
+            public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+            {
+                EditorGUI.BeginProperty(position, label, property);
+                EditorGUI.BeginChangeCheck();
 
-            string indexName = nameof(def.Index);
-            string nameName = nameof(def.Name);
+                int indent = EditorGUI.indentLevel;
+                EditorGUI.indentLevel = 0;
 
-            Rect indexRect = new Rect(position.x, position.y, indexFieldWidth + labelWidth, position.height);
-            EditorGUI.PropertyField(indexRect, property.FindPropertyRelative(indexName), new GUIContent(indexName));
+                EditorGUIUtility.labelWidth = labelWidth;
 
-            float nameFieldWidth = position.width - indexFieldWidth - labelWidth - padding - spacing;
+                string indexName = nameof(def.Index);
+                string nameName = nameof(def.Name);
 
-            Rect nameRect = new Rect(position.x + indexFieldWidth + labelWidth + padding + spacing, position.y, nameFieldWidth, position.height);
-            EditorGUI.PropertyField(nameRect, property.FindPropertyRelative(nameName), new GUIContent(nameName));
+                Rect indexRect = new Rect(position.x, position.y, indexFieldWidth + labelWidth, position.height);
+                EditorGUI.PropertyField(indexRect, property.FindPropertyRelative(indexName), new GUIContent(indexName));
 
-            EditorGUIUtility.labelWidth = 0;
-            EditorGUI.indentLevel = indent;
+                float nameFieldWidth = position.width - indexFieldWidth - labelWidth - padding - spacing;
 
-            if (EditorGUI.EndChangeCheck())
-                property.serializedObject.ApplyModifiedProperties();
+                Rect nameRect = new Rect(position.x + indexFieldWidth + labelWidth + padding + spacing, position.y, nameFieldWidth, position.height);
+                EditorGUI.PropertyField(nameRect, property.FindPropertyRelative(nameName), new GUIContent(nameName));
 
-            EditorGUI.EndProperty();
+                EditorGUIUtility.labelWidth = 0;
+                EditorGUI.indentLevel = indent;
+
+                if (EditorGUI.EndChangeCheck())
+                    property.serializedObject.ApplyModifiedProperties();
+
+                EditorGUI.EndProperty();
+            }
         }
     }
-
 }
