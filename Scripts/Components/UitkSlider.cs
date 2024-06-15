@@ -10,7 +10,12 @@ namespace DA_Assets.UEL
 
         private new class UxmlFactory : UxmlFactory<SliderG, UxmlTraits> { }
 
-        private new class UxmlTraits : BaseSlider<float>.UxmlTraits
+        private new class UxmlTraits
+#if UNITY_2023_1_OR_NEWER
+            : BaseSlider<float>.UxmlTraits<UxmlFloatAttributeDescription>
+#else
+            : BaseSlider<float>.UxmlTraits
+#endif
         {
             UxmlStringAttributeDescription m_Guid = GuidGenerator.GetGuidField();
 
