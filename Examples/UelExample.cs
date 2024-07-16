@@ -1,3 +1,4 @@
+#if UNITY_2021_3_OR_NEWER
 using UnityEngine;
 
 namespace DA_Assets.UEL
@@ -20,3 +21,4 @@ namespace DA_Assets.UEL
         }
     }
 }
+#endif
